@@ -1,5 +1,7 @@
 //задание 1
-var numberName = {
+
+function typeNumberName (a) {
+	let numberName = {
 	0: "ноль",
 	1: "один",
 	2: "два",
@@ -12,16 +14,11 @@ var numberName = {
 	9: "девять"
 	
 };
-
-var arrayOfNumberNames = ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"];
-
-
-function typeNumberName (a) {
 	console.log (numberName[a]+ " - это способ решения задачи через объект")
 }
 
 function typeNumberNameV2 (a) {
-	
+    let arrayOfNumberNames = ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"];	
 	console.log (arrayOfNumberNames[a]+ " - это способ решения задачи через массив")
 }
 
