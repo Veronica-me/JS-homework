@@ -6,7 +6,7 @@ for (let i=str.length - 1; i >= 0; i--) {
 
 //Переменная содержит в себе число. Написать скрипт который посчитает факториал этого числа.
 
-var k = 5;
+var k = 6;
 var fctrl = 1;
 
 function getFactorial (z) {   
@@ -32,9 +32,7 @@ var n = 6;
 var multipliers = [];
 
 for (let i = 1; i <= value; i++){
-	if (value%i) {
-		continue
-	}else {
+	if (value%i==0) {
 		multipliers.push(i);
 	}
 	
@@ -51,6 +49,19 @@ if (n < multipliers.length) {
 }
 
 //Найти сумму цифр числа которые кратны двум
+var m = 815276;
+var sum = 0;
+console.log(m); 
+
+while (m/10 > 0)  {
+	let mod = m%10;
+	m = (m-mod)/10;
+	if (mod%2==0){
+	  sum += mod;	
+	}
+	
+}
+console.log("сумма четных цифр равна "+sum); 
 
 
 //Найти минимальное число которое больше 300 и нацело делиться на 17
