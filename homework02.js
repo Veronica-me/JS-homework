@@ -28,16 +28,27 @@ console.log (getFactorial(k));
 //Дано число - вывести первые N делителей этого числа нацело.
 
 var value = 100;
-var n = 6;
+var n = 5;
 var multipliers = [];
 
 for (let i = 1; i <= value; i++){
-	if (value%i==0) {
+	if (value%i==0 && multipliers.length<n){
 		multipliers.push(i);
-	}
+		console.log(i);
+		}
 	
 }
 
+/* v2
+n = (n < multipliers.length) ? n : multipliers.length; 
+console.log (n);
+for (let i=0; i< n; i++) {
+		console.log(multipliers[i])
+	}
+
+*/
+
+/* v1
 if (n < multipliers.length) {
 	for (let i=0; i< n; i++) {
 		console.log(multipliers[i])
@@ -46,7 +57,7 @@ if (n < multipliers.length) {
 	for (let i=0; i< multipliers.length; i++) {
 		console.log(multipliers[i])
 	}
-}
+}*/
 
 //Найти сумму цифр числа которые кратны двум
 var m = 815276;
