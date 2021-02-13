@@ -93,12 +93,27 @@ function creditCalculator (crBody, percent, crLenght) {
 }
 creditCalculator(87000, 12, 4);
 
-//v2 рекурсия
-function creditCalculatorV2 (crBody, percent, crLenght) {
+//v2 рекурсия+
+function creditCalculatorV2 (crBody, percent, crLenght){
+	let percentFeeTotal = 0;
+	let feeTotal = crBody;
+	let crBodyInYear = crBody/crLenght;
+	calculatePercents(crBody);
+	feeTotal += percentFeeTotal;
+	console.log(feeTotal+" USD оплатит клиент за все время кредита");
 	
+function calculatePercents(crBody){
+	let percentFee = crBody*percent/100;
+    crBody -= crBodyInYear;
+	percentFeeTotal += percentFee;
+	console.log(percentFee+" USD процентов за год");
+	if (crBody > 0){
+		calculatePercents(crBody);
+	}
+}
 }
 
-
+creditCalculatorV2 (87000, 12, 4);
 
 
 //Переменная содержит в себе строку. Вывести строку в обратном порядке.
@@ -182,7 +197,7 @@ function calcSumOfNumbers (m){
 function calcSumOfNumbersV2 (m){
 	
 }
-function splitNumber(){}
+
 
 //Найти минимальное число которое больше 300 и нацело делиться на 17
 //изначально написано рекурсией+
