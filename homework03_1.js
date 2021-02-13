@@ -192,10 +192,18 @@ function calcSumOfNumbers (m){
 	console.log("сумма четных цифр равна "+sum); 
 }
 
-//v2 рекурсия
-
+//v2 рекурсия+
+var sum = 0;
 function calcSumOfNumbersV2 (m){
-	
+	let mod = m%10;
+	m = (m-mod)/10;
+	if (mod%2==0){
+	sum += mod;	
+	}
+	if (m/10 > 0){
+		calcSumOfNumbersV2 (m)
+	}
+	return sum;
 }
 
 
