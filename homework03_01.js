@@ -95,7 +95,7 @@ function creditCalculator (crBody, percent, crLenght) {
 //	console.log(feeTotal+" USD оплатит клиент за все время кредита");
 	return feeTotal;
 }
-
+console.log("за все время оплачено "+creditCalculator (87000, 12, 4));
 
 //v2 рекурсия+
 function creditCalculatorV2 (crBody, percent, crLenght){
@@ -106,16 +106,20 @@ function creditCalculatorV2 (crBody, percent, crLenght){
 	feeTotal += percentFeeTotal;
 	console.log(feeTotal+" USD оплатит клиент за все время кредита");
 	return feeTotal;
-function calculatePercents(crBody){
+
+	function calculatePercents(crBody){
 	let percentFee = crBody*percent/100;
     crBody -= crBodyInYear;
 	percentFeeTotal += percentFee;
 	console.log(percentFee+" USD процентов за год");
 	if (crBody > 0){
-		calculatePercents(crBody);
+		return calculatePercents(crBody);
 	}
+	return percentFeeTotal;
 }
 }
+
+console.log("за все время будет оплачено "+creditCalculatorV2 (87000, 12, 4));
 
 
 
@@ -143,7 +147,7 @@ function getFactorial (z) {
 	} else {
 		factorial = "факториал отрицательного числа не определен";
 	}
-	return(factorial);
+	return factorial;
 }
 
 //v2 рекурсия+
