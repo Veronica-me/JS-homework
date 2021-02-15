@@ -226,16 +226,14 @@ function calcSumOfNumbersV2 (m){
 function findMinValue (val,del) {
 	if (val%del){
 		val++;
-		findMinValue (val,del);
-		
+		return findMinValue (val,del);
 	} else {
-		console.log(val);
-
+		return val;
 	}
 	
 }
-let d = findMinValue (300, 17);
-console.log (d);
+
+console.log ("минимальное число  "+findMinValue (300, 17));
 
 //Заданы две переменные для двух целых чисел, найти максимальное общее значение которое нацело делит два заданных числа.
 
@@ -250,22 +248,24 @@ function maxCommonFactor (val1, val2) {
 			}	
 	}
 }
-console.log( maxCommonFactor (100, 50));
+console.log( maxCommonFactor (120, 50));
+
 //v2 рекурсия+
 function maxCommonFactorV2 (val1, val2) {
 	let i = (val1<val2) ? val1 : val2;
-	doMath (val1, val2, i);
+	return doMath (val1, val2, i);
 	
 }
 
 function doMath (val1, val2, i){
 	if ((val2%i) || (val1%i)) {
 		i--;
-		doMath(val1, val2, i)
+		return doMath(val1, val2, i)
 	}else {
 		console.log(i+" это наибольший общий делитель");
 		return i;
 	}	
+	
 }
 
-console.log( maxCommonFactorV2 (100, 50));
+console.log (maxCommonFactorV2  (120, 50));
