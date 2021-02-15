@@ -91,10 +91,11 @@ function creditCalculator (crBody, percent, crLenght) {
 	}
 
 	feeTotal += percentFeeTotal;
-	console.log(percentFeeTotal+" USD процентов за "+crLenght+" лет");
-	console.log(feeTotal+" USD оплатит клиент за все время кредита");
+//	console.log(percentFeeTotal+" USD процентов за "+crLenght+" лет");
+//	console.log(feeTotal+" USD оплатит клиент за все время кредита");
+	return feeTotal;
 }
-creditCalculator(87000, 12, 4);
+
 
 //v2 рекурсия+
 function creditCalculatorV2 (crBody, percent, crLenght){
@@ -104,7 +105,7 @@ function creditCalculatorV2 (crBody, percent, crLenght){
 	calculatePercents(crBody);
 	feeTotal += percentFeeTotal;
 	console.log(feeTotal+" USD оплатит клиент за все время кредита");
-	
+	return feeTotal;
 function calculatePercents(crBody){
 	let percentFee = crBody*percent/100;
     crBody -= crBodyInYear;
@@ -116,15 +117,19 @@ function calculatePercents(crBody){
 }
 }
 
-creditCalculatorV2 (87000, 12, 4);
+
 
 
 //Переменная содержит в себе строку. Вывести строку в обратном порядке.
 function reversePlayback(str){
+	let strRevers = "";
 	for (let i=str.length - 1; i >= 0; i--) {
-		console.log(str[i]);
+	    strRevers += str[i]
+		//	console.log(str[i]);
 	}
+	return (strRevers);
 }
+console.log(reversePlayback("hello darkness, my old friends"));
 //Переменная содержит в себе число. Написать скрипт который посчитает факториал этого числа.
 
 function getFactorial (z) {   
@@ -163,23 +168,27 @@ function showNMultipliers (value, n) {
 	for (let i = 1; i <= value; i++){
 		if (value%i==0 && multipliers.length<n){
 			multipliers.push(i);
-			console.log(i);
+		//	console.log(i);
 			}
 	}
+	return multipliers;
 }
-
+console.log(showNMultipliers (100, 5));
 //v2 рекурсия+
-var b = 1, x=0;
+var b = 1, x=0, mult = [];
 function showNMultipliersV2 (value, n) {
 	if (value%b==0){
-		console.log(b);
+		mult.push(b);
 		x++;
 		}
 		b++;	
 		if ((x < n) && (value/b >= 1)){
 			showNMultipliersV2 (value, n)
 		}	
+	return(mult)
 }
+
+console.log(showNMultipliersV2 (100, 5));
 
 //Найти сумму цифр числа которые кратны двум
 
@@ -192,8 +201,10 @@ function calcSumOfNumbers (m){
 	  	sum += mod;	
 		}
 	}
-	console.log("сумма четных цифр равна "+sum); 
+	return sum; 
 }
+
+console.log("сумма четных цифр 65144859 равна "+calcSumOfNumbers (65144859));
 
 //v2 рекурсия+
 var sum = 0;
@@ -216,10 +227,15 @@ function findMinValue (val,del) {
 	if (val%del){
 		val++;
 		findMinValue (val,del);
+		
 	} else {
-		console.log(val)
+		console.log(val);
+
 	}
+	
 }
+let d = findMinValue (300, 17);
+console.log (d);
 
 //Заданы две переменные для двух целых чисел, найти максимальное общее значение которое нацело делит два заданных числа.
 
@@ -229,11 +245,12 @@ function maxCommonFactor (val1, val2) {
 		    if ((val2%i) || (val1%i)) {
 			}else {
 				console.log(i+" это наибольший общий делитель");
-				break;
+				return i;
+				
 			}	
 	}
 }
-
+console.log( maxCommonFactor (100, 50));
 //v2 рекурсия+
 function maxCommonFactorV2 (val1, val2) {
 	let i = (val1<val2) ? val1 : val2;
@@ -247,6 +264,8 @@ function doMath (val1, val2, i){
 		doMath(val1, val2, i)
 	}else {
 		console.log(i+" это наибольший общий делитель");
-		
+		return i;
 	}	
 }
+
+console.log( maxCommonFactorV2 (100, 50));
