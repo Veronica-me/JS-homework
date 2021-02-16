@@ -136,7 +136,8 @@ function reversePlayback(str){
 console.log(reversePlayback("hello darkness, my old friends"));
 //Переменная содержит в себе число. Написать скрипт который посчитает факториал этого числа.
 
-function getFactorial (z) {   
+function getFactorial (z) {  
+	if (z >= 0) { 
 	let factorial  = 1;
 	if (z > 0){
 	   for (let i = 1; i <= z; i++){
@@ -144,10 +145,11 @@ function getFactorial (z) {
 	    }
     } else if (z == 0){
 		factorial = 1;
-	} else {
-		factorial = "факториал отрицательного числа не определен";
-	}
+	} 
 	return factorial;
+}else {
+	return false;
+} 
 }
 
 //v2 рекурсия+
@@ -159,18 +161,17 @@ function getFactorialV2 (z) {
     } else if (z == 0){
 		return 1;
 	} else {
-		return "факториал отрицательного числа не определен";
-	}
-	
+		return false;
+	}	
 }
 
 
 //Дано число - вывести первые N делителей этого числа нацело.
 
-function showNMultipliers (value, n) {
+function showNMultipliers (number, n) {
 	let multipliers = [];
-	for (let i = 1; i <= value; i++){
-		if (value%i==0 && multipliers.length<n){
+	for (let i = 1; i <= number; i++){
+		if (number%i==0 && multipliers.length<n){
 			multipliers.push(i);
 		//	console.log(i);
 			}
@@ -180,14 +181,14 @@ function showNMultipliers (value, n) {
 console.log(showNMultipliers (100, 5));
 //v2 рекурсия+
 var b = 1, x=0, mult = [];
-function showNMultipliersV2 (value, n) {
-	if (value%b==0){
+function showNMultipliersV2 (number, n) {
+	if (number%b==0){
 		mult.push(b);
 		x++;
 		}
 		b++;	
-		if ((x < n) && (value/b >= 1)){
-			showNMultipliersV2 (value, n)
+		if ((x < n) && (number/b >= 1)){
+			showNMultipliersV2 (number, n)
 		}	
 	return(mult)
 }
@@ -227,10 +228,10 @@ function calcSumOfNumbersV2 (m){
 
 //Найти минимальное число которое больше 300 и нацело делиться на 17
 //изначально написано рекурсией+
-function findMinValue (val,del) {
-	if (val%del){
+function findMinValue (val,divider) {
+	if (val%divider){
 		val++;
-		return findMinValue (val,del);
+		return findMinValue (val,divider);
 	} else {
 		return val;
 	}
@@ -241,10 +242,10 @@ console.log ("минимальное число  "+findMinValue (300, 17));
 
 //Заданы две переменные для двух целых чисел, найти максимальное общее значение которое нацело делит два заданных числа.
 
-function maxCommonFactor (val1, val2) {
-	let mVal = (val1<val2) ? val1 : val2;
-		for (let i = mVal; i>0; i--){
-		    if ((val2%i) || (val1%i)) {
+function maxCommonFactor (number1, number2) {
+	let maxNumber = (number1<number2) ? number1 : number2;
+		for (let i = maxNumber; i>0; i--){
+		    if ((number2%i) || (number1%i)) {
 			}else {
 				console.log(i+" это наибольший общий делитель");
 				return i;
@@ -255,19 +256,19 @@ function maxCommonFactor (val1, val2) {
 console.log( maxCommonFactor (120, 50));
 
 //v2 рекурсия+
-function maxCommonFactorV2 (val1, val2) {
-	let i = (val1<val2) ? val1 : val2;
-	return doMath (val1, val2, i);
+function maxCommonFactorV2 (number1, number2) {
+	let divider = (number1<number2) ? number1 : number2;
+	return doMath (number1, number2, divider);
 	
 }
 
-function doMath (val1, val2, i){
-	if ((val2%i) || (val1%i)) {
-		i--;
-		return doMath(val1, val2, i)
+function doMath (number1, number2, divider){
+	if ((number2%divider) || (number1%divider)) {
+		divider--;
+		return doMath(number1, number2, divider)
 	}else {
-		console.log(i+" это наибольший общий делитель");
-		return i;
+		console.log(divider+" это наибольший общий делитель");
+		return divider;
 	}	
 	
 }
