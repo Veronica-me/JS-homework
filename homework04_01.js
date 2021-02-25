@@ -67,7 +67,7 @@ function matrixMultiplyV2 (matrix1, matrix2){
 			let j =0;
 			for (rowM1 of matrix1){
 				let cellResultMatrix = 0;
-                let k = 0;
+                                let k = 0;
 				for (rowM2 of matrix2[j]){
 					
 					cellResultMatrix += rowM1[k]*rowM2;
