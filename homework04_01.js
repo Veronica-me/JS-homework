@@ -64,7 +64,6 @@ function matrixMultiplyV2 (matrix1, matrix2){
 
 		if (matrix1[0].length == matrix2.length){
 
-			console.log("УМНОЖЕНИЕ в цикл попали");
 			let j =0;
 			for (rowM1 of matrix1){
 				let cellResultMatrix = 0;
@@ -165,7 +164,7 @@ function cutSelectedColumV2(array) {
 			}
 		}
 		if (count == array.length) {
-//			console.log("нет нулей "+ i);
+
             let sumElements = 0;
 			for (rowElement of array){
 				sumElements += rowElement[i];
