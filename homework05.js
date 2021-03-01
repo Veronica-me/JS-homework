@@ -48,9 +48,8 @@ function inspectUniqueValuesArray (array){
             }
         }  
     }
-    if (j == array.length) {
-        return true;
-    }
+    return true;
+
 }
 
 //Задан массив объектов студентов вида [{name: “Ivan”, estimate: 4, course: 1, active: true},{name: “Ivan”, estimate: 3, course: 1, active: true},{name: “Ivan”, estimate: 2, course: 4, active: false},{name: “Ivan”, estimate: 5, course: 2, active: true}] - 
