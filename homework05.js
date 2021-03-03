@@ -75,7 +75,7 @@ students.push(new Student("Alibaba", 2, 3, true));
 students.push(new Student("Elvis", 3, 4, true));
 students.push(new Student("Dmytro", 4, 3, false));
 students.push(new Student("Alex", 4, 3, false));
-students.push(new Student("Vasilisa", 5, 5, true));
+students.push(new Student("Vasilisa", 5, 6, true));
 
 function getCourseEstimate(arraySrudents){
     let objOfEstimates = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}    
@@ -97,11 +97,10 @@ function getCourseEstimate(arraySrudents){
 }
 
 function studentsActivity (arrayStudents) {
-    let objOfActivity = {1: {active:0, notActive: 0}, 
-                         2: {active:0, notActive: 0}, 
-                        3: {active:0, notActive: 0}, 
-                        4: {active:0, notActive: 0}, 
-                        5: {active:0, notActive: 0}}
+    let objOfActivity = {}
+    arrayStudents.forEach((item) => {
+        objOfActivity[item.course] = {active:0, notActive: 0};
+    })
 
     arrayStudents.forEach((item) => {
         
@@ -114,3 +113,5 @@ function studentsActivity (arrayStudents) {
 
     return objOfActivity;
 }
+
+console.log(studentsActivity(students))
