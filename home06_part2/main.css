@@ -8,17 +8,16 @@
     background-color: #000;
 }
 
-.green{
+.good{
     background-color: green;
     color: #fff;
 }
 
-.first-part {
-    background-color: #4f686e;
-    height: 100%;
+.normal {
+    background-color: yellow;
 }
 
-.phrase {
-    color: crimson;
-    line-height: 28px;
+.bad {
+    background-color: red;
+    
 }
