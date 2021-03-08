@@ -4,11 +4,10 @@
 //При каждом действии удаления или добавления студентов нужно пересчитывать статистику средней оценки в разрезе каждого курса и подсчета количества неактивных студентов и изменять соответствующее содержимое.
 //В ряде предыдущих заданий - выделять красным цветом тех студентов которые имеют оценку 3 и менее. которые от 3 до 4  - желтым и которые 4 и выше - зеленым.
 //Аналогично как в предыдущем задании этого урока отмечать фоновым цветом вывод статистики в разрезе каждого курса касательно средней оценки
+//По нажатие на имя студента - удалять имя, вместо имени показывать форму ввода - по нажатию на ENTER сохранять новое имя для этого студента, удалять форму ввода и выводить в списке новое имя студента
+//По аналогии предыдущего пункта сделать тоже самое с номером курса и с оценкой студента. 
 
-//По нажатие на имя студента - удалять имя, вместо имени показывать форму ввода - 
-//по нажатию на ENTER сохранять новое имя для этого студента, удалять форму ввода и выводить в списке новое имя студента
-
-//По аналогии предыдущего пункта сделать тоже самое с номером курса и с оценкой студента. Не забыть что при изменении оценки статистика также должна быть пересчитана и выведена новая статистика.
+//Не забыть что при изменении оценки статистика также должна быть пересчитана и выведена новая статистика.
 
 
 //Добавить для каждого студента иконку по нажатию на которую студент переводится в статус неактивный из активного и наоборот - при этом для двух состояний иконки тоже должны быть разными и изменять
@@ -80,6 +79,145 @@ Student.prototype.getEstimate = function() {
 
 }
 
+Student.prototype.eventChangeName = function(event){
+    let td = event.target;
+    tr = td.closest("tr");
+    let index = parseInt(tr.getAttribute("data-index"));
+
+    td.innerHTML = "";
+    let input = document.createElement("INPUT");
+    input.type = "text";
+    input.addEventListener("keyup", this.eventNewName.bind(this));
+    input.addEventListener("blur", this.eventBlurNewName.bind(this));
+    
+    td.appendChild(input);
+    input.focus();
+
+}
+
+Student.prototype.eventNewName = function(event) {
+    event.preventDefault();
+
+    if (event.keyCode === 13){
+        
+        event.target.removeEventListener("blur", this.eventBlurNewName.bind(this));
+        let firstname = event.target.value;
+
+        let tr = event.target.closest("tr");
+        let index = tr.getAttribute("data-index");
+
+        this.students[index].name = firstname;
+
+        event.target.closest("td").innerHTML = firstname;
+
+    }
+
+}
+
+Student.prototype.eventBlurNewName = function(event) {
+    event.preventDefault();
+    let tr = event.target.closest("tr");
+    let td = event.target.closest("td");
+    let index = tr.getAttribute("data-index");
+    
+    td.innerHTML = this.students[index].name;
+    
+
+}
+
+
+Student.prototype.eventChangeCourse = function(event){
+    let td = event.target;
+    tr = td.closest("tr");
+    let index = parseInt(tr.getAttribute("data-index"));
+
+    td.innerHTML = "";
+    let input = document.createElement("INPUT");
+    input.type = "text";
+    input.addEventListener("keyup", this.eventNewCourse.bind(this));
+    input.addEventListener("blur", this.eventBlurNewCourse.bind(this));
+    
+    td.appendChild(input);
+    input.focus();
+
+}
+
+Student.prototype.eventNewCourse = function(event) {
+    event.preventDefault();
+
+    if (event.keyCode === 13){
+        
+        event.target.removeEventListener("blur", this.eventBlurNewCourse.bind(this));
+        let newCourse = event.target.value;
+
+        let tr = event.target.closest("tr");
+        let index = tr.getAttribute("data-index");
+
+        this.students[index].course = newCourse;
+
+        event.target.closest("td").innerHTML = newCourse;
+
+    }
+
+} 
+
+Student.prototype.eventBlurNewCourse = function(event) {
+    event.preventDefault();
+    let tr = event.target.closest("tr");
+    let td = event.target.closest("td");
+    let index = tr.getAttribute("data-index");
+    td.innerHTML = this.students[index].course;
+}
+
+
+Student.prototype.eventChangeEstimate = function(event){
+    let td = event.target;
+    tr = td.closest("tr");
+    let index = parseInt(tr.getAttribute("data-index"));
+
+    td.innerHTML = "";
+    let input = document.createElement("INPUT");
+    input.type = "text";
+    input.addEventListener("keyup", this.eventNewEstimate.bind(this));
+    input.addEventListener("blur", this.eventBlurNewEstimate.bind(this));
+    
+    td.appendChild(input);
+    input.focus();
+
+}
+
+Student.prototype.eventNewEstimate = function(event) {
+    event.preventDefault();
+
+    if (event.keyCode === 13){
+        
+        event.target.removeEventListener("blur", this.eventBlurNewEstimate.bind(this));
+        let newEstimate = event.target.value;
+
+        let tr = event.target.closest("tr");
+        let index = tr.getAttribute("data-index");
+
+        this.students[index].estimate = newEstimate;
+
+        event.target.closest("td").innerHTML = newEstimate;
+
+    }
+
+} 
+
+Student.prototype.eventBlurNewEstimate = function(event) {
+    event.preventDefault();
+    let tr = event.target.closest("tr");
+    let td = event.target.closest("td");
+    let index = tr.getAttribute("data-index");
+    td.innerHTML = this.students[index].estimate;
+
+    
+}
+
+
+
+
 Student.prototype.render = function (){
     this.table.innerHTML = "";
     this.divStatistic.innerHTML = "";
@@ -109,14 +247,17 @@ Student.prototype.render = function (){
 
         let tdFio = document.createElement("TD");
         tdFio.innerHTML = item.name;
+        tdFio.addEventListener("click", this.eventChangeName.bind(this));
         tr.appendChild(tdFio);
       
         let tdCourse = document.createElement("TD");
         tdCourse.innerHTML = item.course;
+        tdCourse.addEventListener("click", this.eventChangeCourse.bind(this));
         tr.appendChild(tdCourse);
         
         let tdEstimate = document.createElement("TD");
         tdEstimate.innerHTML = item.estimate;
+        tdEstimate.addEventListener("click", this.eventChangeEstimate.bind(this));
         tr.appendChild(tdEstimate);
 
         let tdActive = document.createElement("TD");
