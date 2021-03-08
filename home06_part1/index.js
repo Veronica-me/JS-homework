@@ -5,7 +5,7 @@ function FirstPart (selector) {
    
     this.container = document.querySelector(selector);
     this.anchor = document.querySelectorAll("a");
-    this.paragraf = document.querySelectorAll(".phrase");
+    this.paragraf = document.querySelectorAll("p.phrase");
 }
 
 FirstPart.prototype.render = function(){
