@@ -6,9 +6,7 @@
 //Аналогично как в предыдущем задании этого урока отмечать фоновым цветом вывод статистики в разрезе каждого курса касательно средней оценки
 //По нажатие на имя студента - удалять имя, вместо имени показывать форму ввода - по нажатию на ENTER сохранять новое имя для этого студента, удалять форму ввода и выводить в списке новое имя студента
 //По аналогии предыдущего пункта сделать тоже самое с номером курса и с оценкой студента. 
-
 //Не забыть что при изменении оценки статистика также должна быть пересчитана и выведена новая статистика.
-
 //Добавить для каждого студента иконку по нажатию на которую студент переводится в статус неактивный из активного и наоборот - при этом для двух состояний иконки тоже должны быть разными и изменять
 
 function Student (selector) {
@@ -23,12 +21,7 @@ function Student (selector) {
         {name: "Alex", estimate: 4, course: 3, active: false},
         {name: "Vasilisa", estimate: 5, course: 6, active: true},
         {name: "Vasilia", estimate: 4, course: 6, active: true},
-    
-    
     ] ;
-    
-    
-    
     console.log(this);
     
     this.container = document.querySelector(selector);
@@ -44,7 +37,7 @@ Student.prototype.studentsActivity = function(){
     this.students.forEach((item) => {
         this.objOfActivity[item.course] = {active:0, notActive: 0};
      
-    })
+    });
     this.students.forEach((item) => {
         
         if (item.active){
@@ -52,7 +45,7 @@ Student.prototype.studentsActivity = function(){
          } else {
             this.objOfActivity[item.course].notActive++;
          }
-    })
+    });
      
 }
 
@@ -65,7 +58,7 @@ Student.prototype.getEstimate = function() {
         this.objOfEstimates[item.course] = 0;
         this.quantityObj[item.course] = 0; 
         this.sumObj[item.course] = 0; 
-    })
+    });
 
     this.students.forEach((item) => {
         
@@ -74,9 +67,7 @@ Student.prototype.getEstimate = function() {
             this.sumObj[item.course] += Number(item.estimate); 
             this.objOfEstimates[item.course] = this.sumObj[item.course] / this.quantityObj[item.course]
          }
-    })
-
-
+    });
 }
 
 Student.prototype.eventChangeName = function(event){
@@ -109,9 +100,7 @@ Student.prototype.eventNewName = function(event) {
         this.students[index].name = firstname;
 
         event.target.closest("td").innerHTML = firstname;
-
-    }
-
+    };
 }
 
 Student.prototype.eventBlurNewName = function(event) {
@@ -119,10 +108,7 @@ Student.prototype.eventBlurNewName = function(event) {
     let tr = event.target.closest("tr");
     let td = event.target.closest("td");
     let index = tr.getAttribute("data-index");
-    
     td.innerHTML = this.students[index].name;
-    
-
 }
 
 
@@ -130,13 +116,11 @@ Student.prototype.eventChangeCourse = function(event){
     let td = event.target;
     tr = td.closest("tr");
     let index = parseInt(tr.getAttribute("data-index"));
-
     td.innerHTML = "";
     let input = document.createElement("INPUT");
     input.type = "text";
     input.addEventListener("keyup", this.eventNewCourse.bind(this));
-    input.addEventListener("blur", this.eventBlurNewCourse.bind(this));
-    
+    input.addEventListener("blur", this.eventBlurNewCourse.bind(this));    
     td.appendChild(input);
     input.focus();
 
@@ -157,8 +141,7 @@ Student.prototype.eventNewCourse = function(event) {
 
         event.target.closest("td").innerHTML = newCourse;
         this.render();
-    }
-
+    };
 } 
 
 Student.prototype.eventBlurNewCourse = function(event) {
@@ -168,7 +151,6 @@ Student.prototype.eventBlurNewCourse = function(event) {
     let index = tr.getAttribute("data-index");
     td.innerHTML = this.students[index].course;
 }
-
 
 Student.prototype.eventChangeEstimate = function(event){
     let td = event.target;
@@ -183,15 +165,12 @@ Student.prototype.eventChangeEstimate = function(event){
     
     td.appendChild(input);
     input.focus();
-    
-
 }
 
 Student.prototype.eventNewEstimate = function(event) {
     event.preventDefault();
 
-    if (event.keyCode === 13){
-        
+    if (event.keyCode === 13){        
         event.target.removeEventListener("blur", this.eventBlurNewEstimate.bind(this));
         let newEstimate = event.target.value;
 
@@ -201,8 +180,7 @@ Student.prototype.eventNewEstimate = function(event) {
         event.target.closest("td").innerHTML = newEstimate;
         
         this.render();
-    }
-
+    };
 } 
 
 Student.prototype.eventBlurNewEstimate = function(event) {
@@ -210,20 +188,16 @@ Student.prototype.eventBlurNewEstimate = function(event) {
     let tr = event.target.closest("tr");
     let td = event.target.closest("td");
     let index = tr.getAttribute("data-index");
-    td.innerHTML = this.students[index].estimate;
-
-    
+    td.innerHTML = this.students[index].estimate;  
 }
 
 Student.prototype.changeStudentStatus = function(event) {
     let td = event.target;
     tr = td.closest("tr");
     let index = parseInt(tr.getAttribute("data-index"));
-    console.log("клик  "+ index);
+    //console.log("клик  "+ index);
     this.students[index].active = !this.students[index].active;
-
     this.render();
-
 }
 
 Student.prototype.render = function (){
@@ -237,10 +211,8 @@ Student.prototype.render = function (){
        let pMessage = document.createElement("P");
        pMessage.innerHTML = "Студенты не найдены!!"
        this.divStatistic.appendChild(pMessage);
+    };
 
-    }
-
-    console.log(this.objOfActivity)
     this.students.forEach((item, index) => {
         
         let tr = document.createElement("TR");
@@ -286,13 +258,8 @@ Student.prototype.render = function (){
         imgChangeStatus.addEventListener("click", this.changeStudentStatus.bind(this));
         tr.appendChild(imgChangeStatus);
 
-        this.table.appendChild(tr);  
-        
-
-         
-        
-    })
-    
+        this.table.appendChild(tr);      
+    });
     
     let ulStatistic = document.createElement("UL");
     this.divStatistic.appendChild(ulStatistic);
@@ -303,7 +270,7 @@ Student.prototype.render = function (){
         liStatistic.innerHTML = sudentCourse+"   курс: неактивных - "+ this.objOfActivity[sudentCourse].notActive;
         sumNotActive += this.objOfActivity[sudentCourse].notActive;
         ulStatistic.appendChild(liStatistic);
-    }
+    };
     let liTotal = document.createElement("LI"); 
     liTotal.innerHTML = "всего неактивных: "+sumNotActive;
     ulStatistic.appendChild(liTotal);
@@ -314,8 +281,7 @@ Student.prototype.render = function (){
     let ulEstimate = document.createElement("UL");
     this.divStatistic.appendChild(ulEstimate);
 
-    for (let sudentCourse in this.objOfEstimates){
-        
+    for (let sudentCourse in this.objOfEstimates){  
         let liEstimate = document.createElement("LI"); 
         if (this.objOfEstimates[sudentCourse] <= 3) {
             liEstimate.classList.add("bad")
@@ -327,7 +293,7 @@ Student.prototype.render = function (){
         liEstimate.innerHTML = sudentCourse+"   курс: средний балл : "+ this.objOfEstimates[sudentCourse];
         
         ulEstimate.appendChild(liEstimate);
-    }
+    };
 }
 
 
