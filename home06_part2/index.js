@@ -9,8 +9,8 @@
 
 //Не забыть что при изменении оценки статистика также должна быть пересчитана и выведена новая статистика.
 
-
 //Добавить для каждого студента иконку по нажатию на которую студент переводится в статус неактивный из активного и наоборот - при этом для двух состояний иконки тоже должны быть разными и изменять
+
 function Student (selector) {
     this.students = [
         {name: "Ivan", estimate: 4, course: 1, active: true},
@@ -153,10 +153,10 @@ Student.prototype.eventNewCourse = function(event) {
         let tr = event.target.closest("tr");
         let index = tr.getAttribute("data-index");
 
-        this.students[index].course = newCourse;
+        this.students[index].course = Number(newCourse);
 
         event.target.closest("td").innerHTML = newCourse;
-
+        this.render();
     }
 
 } 
@@ -183,6 +183,7 @@ Student.prototype.eventChangeEstimate = function(event){
     
     td.appendChild(input);
     input.focus();
+    
 
 }
 
@@ -196,11 +197,10 @@ Student.prototype.eventNewEstimate = function(event) {
 
         let tr = event.target.closest("tr");
         let index = tr.getAttribute("data-index");
-
-        this.students[index].estimate = newEstimate;
-
+        this.students[index].estimate = Number(newEstimate);
         event.target.closest("td").innerHTML = newEstimate;
-
+        
+        this.render();
     }
 
 } 
@@ -215,8 +215,16 @@ Student.prototype.eventBlurNewEstimate = function(event) {
     
 }
 
+Student.prototype.changeStudentStatus = function(event) {
+    let td = event.target;
+    tr = td.closest("tr");
+    let index = parseInt(tr.getAttribute("data-index"));
+    console.log("клик  "+ index);
+    this.students[index].active = !this.students[index].active;
 
+    this.render();
 
+}
 
 Student.prototype.render = function (){
     this.table.innerHTML = "";
@@ -272,6 +280,11 @@ Student.prototype.render = function (){
         tdDelete.innerHTML = "X";
         tdDelete.addEventListener("click", this.eventRemove.bind(this));
         tr.appendChild(tdDelete);
+
+        let imgChangeStatus = document.createElement("IMG");
+        imgChangeStatus.src = "img/man_resized.png"
+        imgChangeStatus.addEventListener("click", this.changeStudentStatus.bind(this));
+        tr.appendChild(imgChangeStatus);
 
         this.table.appendChild(tr);  
         
